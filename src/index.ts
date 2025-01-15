@@ -2,14 +2,24 @@
 // NOTE: You can remove the first line if you don't plan to release an
 // executable package. E.g. code that can be used as cli like prettier or eslint
 
-import { readLineSync, readFromCsv } from "./stdin";
+import { readJsonFileSync, writeJsonFileSync } from "./stdin";
 
 const main = () => {
-  const lines = readFromCsv(
-    "./machine-readable-business-employment-data-sep-2024-quarter.csv"
-  );
+  const data = readJsonFileSync<{
+    glossary: [
+      {
+        title: string;
+        description: string;
+      },
+    ];
+  }>("./data.json");
 
-  console.log(lines[0], lines[1]);
+  data.glossary.push({
+    title: "example glossary",
+    description: "A simple glossary for reference 2.",
+  });
+
+  writeJsonFileSync("./data.json", data);
 };
 
 main();
