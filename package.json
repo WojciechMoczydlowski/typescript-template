@@ -31,7 +31,7 @@
     "bundle": "rimraf dist && esbuild --outdir=dist --sourcemap --bundle --platform=node --target=node20.10.0 ./src/index.ts",
     "compile": "tsc src",
     "compile:watch": "tsc -w",
-    "dev": "nodemon --watch src --watch test --ext ts,json --exec 'npm run bundle && npm run start'",
+    "dev": "npm run bundle && npm run start",
     "debug": "npm bundle && node --enable-source-maps --inspect-brk ./dist/index.js",
     "debug:test": "node --inspect-brk ./node_modules/.bin/jest --runInBand .",
     "format": "prettier . --write",
@@ -49,6 +49,7 @@
     "@tsconfig/node20": "20.1.4",
     "@types/jest": "29.5.14",
     "@types/node": "20.17.12",
+    "@types/readline-sync": "^1.4.8",
     "@typescript-eslint/eslint-plugin": "6.21.0",
     "@typescript-eslint/parser": "6.21.0",
     "esbuild": "0.21.3",
@@ -60,5 +61,8 @@
     "rimraf": "5.0.10",
     "typescript": "5.7.3"
   },
-  "packageManager": "yarn@4.2.2"
+  "packageManager": "yarn@4.2.2",
+  "dependencies": {
+    "readline-sync": "^1.4.10"
+  }
 }
