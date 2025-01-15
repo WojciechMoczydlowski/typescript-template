@@ -49,3 +49,50 @@ export const readFromCsv = (filePath: string): Record<string, string>[] => {
     );
   });
 };
+
+export async function readJsonFile<T>(filePath: string): Promise<T> {
+  try {
+    const absolutePath = path.resolve(filePath);
+    const fileContent = await fs.readFile(absolutePath, "utf-8");
+    return JSON.parse(fileContent) as T;
+  } catch (error) {
+    console.error(`Error reading JSON file at ${filePath}:`, error);
+    throw error;
+  }
+}
+
+export async function writeJsonFile<T>(
+  filePath: string,
+  data: T
+): Promise<void> {
+  try {
+    const absolutePath = path.resolve(filePath);
+    const jsonContent = JSON.stringify(data, null, 2); // Pretty-print with 2 spaces
+    await fs.writeFile(absolutePath, jsonContent, "utf-8");
+  } catch (error) {
+    console.error(`Error writing JSON file at ${filePath}:`, error);
+    throw error;
+  }
+}
+
+export function readJsonFileSync<T>(filePath: string): T {
+  try {
+    const absolutePath = path.resolve(filePath);
+    const fileContent = fs.readFileSync(absolutePath, "utf-8");
+    return JSON.parse(fileContent) as T;
+  } catch (error) {
+    console.error(`Error reading JSON file at ${filePath}:`, error);
+    throw error;
+  }
+}
+
+export function writeJsonFileSync<T>(filePath: string, data: T): void {
+  try {
+    const absolutePath = path.resolve(filePath);
+    const jsonContent = JSON.stringify(data, null, 2); // Pretty-print with 2 spaces
+    fs.writeFileSync(absolutePath, jsonContent, "utf-8");
+  } catch (error) {
+    console.error(`Error writing JSON file at ${filePath}:`, error);
+    throw error;
+  }
+}
