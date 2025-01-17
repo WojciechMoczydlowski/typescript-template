@@ -96,3 +96,28 @@ export function writeJsonFileSync<T>(filePath: string, data: T): void {
     throw error;
   }
 }
+
+export function readFromTxt(fileName: string) {
+  const absolutePath = path.resolve(fileName);
+
+  try {
+    // Read the file content synchronously
+    return fs.readFileSync(absolutePath, "utf-8");
+  } catch (err) {
+    console.error("Error reading the file:", err);
+    throw err; // Re-throw the error for further handling if needed
+  }
+}
+
+export function writeToTxt(fileName: string, content: string) {
+  const absolutePath = path.resolve(fileName);
+
+  try {
+    // Write the content to the file synchronously
+    fs.writeFileSync(absolutePath, content, "utf-8");
+    console.log(`Content written to ${fileName} successfully.`);
+  } catch (err) {
+    console.error("Error writing to the file:", err);
+    throw err; // Re-throw the error for further handling if needed
+  }
+}

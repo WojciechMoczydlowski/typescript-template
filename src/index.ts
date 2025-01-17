@@ -2,24 +2,27 @@
 // NOTE: You can remove the first line if you don't plan to release an
 // executable package. E.g. code that can be used as cli like prettier or eslint
 
-import { readJsonFileSync, writeJsonFileSync } from "./stdin";
+import { readFromTxt, writeToTxt } from "./stdin";
 
 const main = () => {
-  const data = readJsonFileSync<{
-    glossary: [
-      {
-        title: string;
-        description: string;
-      },
-    ];
-  }>("./data.json");
+  writeToTxt("./data.txt", "Hello world");
+  const data = readFromTxt("./data.txt");
 
-  data.glossary.push({
-    title: "example glossary",
-    description: "A simple glossary for reference 2.",
-  });
+  console.log(data);
 
-  writeJsonFileSync("./data.json", data);
+  // const data = readJsonFileSync<{
+  //   glossary: [
+  //     {
+  //       title: string;
+  //       description: string;
+  //     },
+  //   ];
+  // }>("./data.json");
+  // data.glossary.push({
+  //   title: "example glossary",
+  //   description: "A simple glossary for reference 2.",
+  // });
+  // writeJsonFileSync("./data.json", data);
 };
 
 main();
